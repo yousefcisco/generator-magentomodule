@@ -5,23 +5,30 @@
             <version>0.1.0</version>
         </<%= fullModuleName %>>
     </modules>
+<% if (global || setup) { %>
     <global>
+    <% if (global.model) { %>
         <models>
             <<%= moduleIdentifier %>>
                 <class><%= fullModuleName %>_Model</class>
             </<%= moduleIdentifier %>>
         </models>
+    <% } %>
+    <% if (global.block) { %>
         <blocks>
             <<%= moduleIdentifier %>>
                 <class><%= fullModuleName %>_Block</class>
             </<%= moduleIdentifier %>>
         </blocks>
+    <% } %>
+    <% if (global.helper) { %>
         <helpers>
             <<%= moduleIdentifier %>>
                 <class><%= fullModuleName %>_Helper</class>
             </<%= moduleIdentifier %>>
         </helpers>
-        <% if (setup) { %>
+    <% } %>
+    <% if (setup) { %>
         <resources>
             <<%= moduleIdentifier %>_setup>
                 <setup>
@@ -30,11 +37,12 @@
                 </setup>
             </<%= moduleIdentifier %>_setup>
         </resources>
-        <% } %>
+    <% } %>
     </global>
-    <% if (frontend) { %>
+<% } %>
+<% if (frontend) { %>
     <frontend>
-        <% if (_.indexOf(frontend, 'layout') !== -1) { %>
+    <% if (frontend.layout) { %>
         <layout>
             <updates>
                 <<%= moduleIdentifier %>>
@@ -42,8 +50,8 @@
                 </<%= moduleIdentifier %>>
             </updates>
         </layout>
-        <% } %>
-        <% if (_.indexOf(frontend, 'controller') !== -1) { %>
+    <% } %>
+    <% if (frontend.controller) { %>
         <routers>
             <<%= moduleIdentifier %>>
                 <use>standard</use>
@@ -53,12 +61,12 @@
                 </args>
             </<%= moduleIdentifier %>>
         </routers>
-        <% } %>
-    </frontend>
     <% } %>
-    <% if (adminhtml) { %>
+    </frontend>
+<% } %>
+<% if (adminhtml) { %>
+    <% if (adminhtml.layout) { %>
     <adminhtml>
-        <% if (_.indexOf(frontend, 'layout') !== -1) { %>
         <layout>
             <updates>
                 <<%= moduleIdentifier %>>
@@ -66,9 +74,9 @@
                 </<%= moduleIdentifier %>>
             </updates>
         </layout>
-        <% } %>
     </adminhtml>
-        <% if (_.indexOf(frontend, 'controller') !== -1) { %>
+    <% } %>
+    <% if (adminhtml.controller) { %>
     <admin>
         <routers>
             <<%= moduleIdentifier %>>
@@ -80,6 +88,6 @@
             </<%= moduleIdentifier %>>
         </routers>
     </admin>
-        <% } %>
     <% } %>
+<% } %>
 </config>

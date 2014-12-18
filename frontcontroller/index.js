@@ -1,8 +1,8 @@
 'use strict';
 var util = require('util');
 var yeoman = require('yeoman-generator');
-var fs = require('fs'); 
-var path = require('path'); 
+var fs = require('fs');
+var path = require('path');
 
 var FrontcontrollerGenerator = module.exports = function FrontcontrollerGenerator(args, options, config) {
   this.baseDir = options.env.cwd;
@@ -25,9 +25,9 @@ FrontcontrollerGenerator.prototype.files = function files() {
         this.name = this.name.name;
     } else {
         // Get module information from file path
-        this.codePool = path.basename(fs.realpathSync('../../'))
-        this.namespace = path.basename(fs.realpathSync('../'))
-        this.moduleName = path.basename(fs.realpathSync('.'))
+        this.codePool = path.basename(fs.realpathSync('../../'));
+        this.namespace = path.basename(fs.realpathSync('../'));
+        this.moduleName = path.basename(fs.realpathSync('.'));
         this.etc = 'etc/';
         this.controllers = 'controllers/';
     }
