@@ -56,7 +56,6 @@ module.exports = generators.Base.extend({
             this.config.frontend = {
                 layout: this._has(this.userConfig.frontend, 'layout'),
                 controller: this._has(this.userConfig.frontend, 'controller'),
-                widget: this._has(this.userConfig.frontend, 'widget'),
             };
         } else {
             this.config.frontend = false;
@@ -130,19 +129,6 @@ module.exports = generators.Base.extend({
                         }
                     });
                 }
-
-                // Add widget via sub generator if selected
-                // if (this.config.frontend.widget) {
-                //     this.composeWith('magentomodule:widget', {
-                //         args: [{
-                //             name: 'Mywidget',
-                //             codePool: this.codePool,
-                //             namespace: this.namespace,
-                //             moduleName: this.moduleName,
-                //             modulePath: this.modulePath
-                //         }]
-                //     });
-                // }
             }
         },
 
@@ -278,10 +264,6 @@ module.exports = generators.Base.extend({
                     {
                         name: 'Controller',
                         value: 'controller'
-                    },
-                    {
-                        name: 'Widget',
-                        value: 'widget'
                     }
                 ],
                 default: false
