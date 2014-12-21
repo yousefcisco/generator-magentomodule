@@ -120,25 +120,16 @@ module.exports = generators.Base.extend({
                 }
 
                 // Frontend Controller
-                // if (this.config.frontend.controller) {
-                //     this.composeWith('magentomodule:frontcontroller', {
-                //         args: [
-                //             'IndexController',
-                //             this.config.codePool,
-                //             this.config.namespace,
-                //             this.config.moduleName,
-                //             this.config.modulePath
-                //         ]
-                //     });
-
-                //     var args = [{
-                //             name: 'IndexController',
-                //             codePool: this.config.codePool,
-                //             namespace: this.config.namespace,
-                //             moduleName: this.config.moduleName,
-                //             modulePath: this.config.modulePath
-                //         }];
-                // }
+                if (this.config.frontend.controller) {
+                    this.composeWith('magentomodule:frontcontroller', {
+                        args: [
+                            'IndexController'
+                        ], 
+                        options: {
+                            config: this.config
+                        }
+                    });
+                }
 
                 // Add widget via sub generator if selected
                 // if (this.config.frontend.widget) {
