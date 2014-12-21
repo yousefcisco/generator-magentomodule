@@ -1,6 +1,8 @@
 'use strict';
 
 var generators = require('yeoman-generator');
+var path = require('path');
+var fs = require('fs');
 var _ = require('lodash');
 
 module.exports = generators.NamedBase.extend({
@@ -9,7 +11,13 @@ module.exports = generators.NamedBase.extend({
         if (typeof this.options.config !== 'undefined') {
             this.config = this.options.config;
         } else {
-            this.config = null;
+            var namespace = path.basename(fs.realpathSync('../'));
+            var moduleName = path.basename(fs.realpathSync('.'));
+
+            this.config = {
+                modulePath: '',
+                fullModuleName: namespace + '_' + moduleName
+            };
         }
     },
 

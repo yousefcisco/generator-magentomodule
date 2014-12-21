@@ -1,6 +1,6 @@
 <?php
 /**
- * Index Controller
+ * <%= name %>
  *
  */
 class <%= fullModuleName %>_<%= name %> extends Mage_Core_Controller_Front_Action
