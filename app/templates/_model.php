@@ -3,6 +3,6 @@
  * Model template
  *
  */
-class <%= fullModuleName %>_Model_Mymodel extends Mage_Core_Model_Abstract
+class <%= fullModuleName %>_Model_<%= name %> extends Mage_Core_Model_Abstract
 {
 }

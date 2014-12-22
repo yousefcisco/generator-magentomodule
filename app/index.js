@@ -1,6 +1,7 @@
 'use strict';
 
 var generators = require('yeoman-generator');
+var _ = require('lodash');
 
 module.exports = generators.Base.extend({
 
@@ -47,6 +48,8 @@ module.exports = generators.Base.extend({
                 helper: this._has(this.userConfig.global, 'helper'),
                 model: this._has(this.userConfig.global, 'model'),
                 block: this._has(this.userConfig.global, 'block'),
+                model_name: this.userConfig.global_model_name,
+                block_name: this.userConfig.global_block_name,
             };
         } else {
             this.config.global = false;
@@ -87,18 +90,26 @@ module.exports = generators.Base.extend({
                 }
                 // Model
                 if (this.config.global.model) {
+                    var model_name = this.config.global.model_name;
+
                     this.fs.copyTpl(
                         this.templatePath('_model.php'),
-                        this.destinationPath(this.modulePath + '/Model/Mymodel.php'),
-                        this.config
+                        this.destinationPath(this.modulePath + '/Model/' + model_name + '.php'),
+                        _.extend({}, this.config, {
+                            name: model_name
+                        })
                     );
                 }
                 // Block
                 if (this.config.global.block) {
+                    var block_name = this.config.global.block_name;
+
                     this.fs.copyTpl(
                         this.templatePath('_block.php'),
-                        this.destinationPath(this.modulePath + '/Block/Myblock.php'),
-                        this.config
+                        this.destinationPath(this.modulePath + '/Block/' + block_name + '.php'),
+                        _.extend({}, this.config, {
+                            name: block_name
+                        })
                     );
                 }
             }
@@ -123,7 +134,7 @@ module.exports = generators.Base.extend({
                     this.composeWith('magentomodule:frontcontroller', {
                         args: [
                             'IndexController'
-                        ], 
+                        ],
                         options: {
                             config: this.config
                         }
@@ -251,6 +262,24 @@ module.exports = generators.Base.extend({
                     }
                 ],
                 default: false
+            },
+            {
+                type: 'input',
+                name: 'global_model_name',
+                message: 'What should your Model be called?',
+                when: function(options) {
+                    return options.global.indexOf('model') !== -1;
+                },
+                default: 'MyModel'
+            },
+            {
+                type: 'input',
+                name: 'global_block_name',
+                message: 'What should your Block be called?',
+                when: function(options) {
+                    return options.global.indexOf('block') !== -1;
+                },
+                default: 'MyBlock'
             },
             {
                 type: 'checkbox',
