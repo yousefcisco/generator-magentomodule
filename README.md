@@ -16,7 +16,7 @@ $ npm install -g yo
 To install generator-magentomodule from npm, run:
 
 ```
-$ npm install -g generator-magentomodule
+$ npm link
 ```
 
 Finally, initiate the generator from your Magento root directory:
